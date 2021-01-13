@@ -14,24 +14,47 @@
     <main class="main-container">
       <h1>¿Podrás con todas?</h1>
       <section class="main-game">
-        <div class="game-container rojo"><p class="game-text">rojo</p></div>
-        <div class="game-container rojizo"><p class="game-text">rojizo</p></div>
-        <div class="game-container naranjillo">
+        <div id="rojo" class="game-container rojo" data-color="rojo">
+          <p class="game-text">rojo</p>
+        </div>
+        <div id="rojizo" class="game-container rojizo" data-color="rojizo">
+          <p class="game-text">rojizo</p>
+        </div>
+        <div
+          id="rojillo"
+          class="game-container naranjillo"
+          data-color="rojillo"
+        >
           <p class="game-text">rojillo</p>
         </div>
-        <div class="game-container vino"><p class="game-text">vino</p></div>
-        <div class="game-container vinillo">
+        <div id="vino" class="game-container vino" data-color="vino">
+          <p class="game-text">vino</p>
+        </div>
+        <div id="vinillo" class="game-container vinillo" data-color="vinillo">
           <p class="game-text">vinillo</p>
         </div>
-        <div class="game-container rojazo"><p class="game-text">rojazo</p></div>
-        <div class="game-container rojorojo">
+        <div id="rojazo" class="game-container rojazo" data-color="rojazo">
+          <p class="game-text">rojazo</p>
+        </div>
+        <div
+          id="rojorojo"
+          class="game-container rojorojo"
+          data-color="rojorojo"
+        >
           <p class="game-text">rojorojo</p>
         </div>
-        <div class="game-container rojito"><p class="game-text">rojito</p></div>
-        <div class="game-container negro"><p class="game-text">negro</p></div>
+        <div id="rojito" class="game-container rojito" data-color="rojito">
+          <p class="game-text">rojito</p>
+        </div>
+        <div id="negro" class="game-container negro" data-color="negro">
+          <p class="game-text">negro</p>
+        </div>
       </section>
-      <button class="game-btn">Iniciar</button>
+      <button id="btnEmpezar" onclick="empezarJuego()" class="game-btn">
+        Iniciar
+      </button>
     </main>
     <footer class="footer-container"></footer>
+    <script src="./srcipts.js"></script>
   </body>
 </html>

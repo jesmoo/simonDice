@@ -83,9 +83,62 @@ body {
   font-size: 1.8rem;
   border: none;
   border-radius: 15px;
+  border-bottom: 4px solid #1f3346;
   outline: none;
   background-color: var(--colorCuarto);
   box-shadow: black 0 0 3px 1px;
+
+  /* animacion */
+  transition: display 2s;
+  -webkit-transition: display 2s;
+  transition: visibility 1s;
+  -webkit-transition: visibility 1s;
+}
+.game-btn:hover {
+  color: #ecf0f1;
+  border: 1px solid var(--colorTerciario);
+  border-bottom: 4px solid var(--colorTerciario);
+  cursor: pointer;
+}
+
+.game-btn:active {
+  transform: scale(0.95);
+}
+
+.hide {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+
+  visibility: hidden;
+}
+
+/* animacion */
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+    display: block;
+  }
+
+  to {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    display: block;
+  }
+
+  to {
+    display: none;
+    opacity: 0;
+  }
 }
 
 /* colores de los cuadros */
