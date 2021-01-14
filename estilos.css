@@ -65,6 +65,9 @@ body {
   justify-content: center;
   box-shadow: black 0px 0px 7px 0px;
 }
+.game-container:hover {
+  cursor: pointer;
+}
 .game-text {
   text-transform: capitalize;
   font-size: 2rem;
@@ -105,6 +108,11 @@ body {
   transform: scale(0.95);
 }
 
+.efectoBtn:active {
+  transform: scale(0.95);
+}
+
+/* complemenarios */
 .hide {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
@@ -114,6 +122,9 @@ body {
   animation-name: fadeOut;
 
   visibility: hidden;
+}
+.iluminar {
+  opacity: 0.6;
 }
 
 /* animacion */
