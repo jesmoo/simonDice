@@ -10,7 +10,7 @@ const rojorojo = document.getElementById("rojorojo");
 const rojito = document.getElementById("rojito");
 const negro = document.getElementById("negro");
 // nivels
-const MAXIMOlEVELS = 7;
+const MAXIMOlEVELS = 3;
 
 class game {
   constructor() {
@@ -20,7 +20,6 @@ class game {
   }
   inicializar() {
     // agrega una clase
-    btnEmpezar.classList.add("hide");
     this.nivel = 1;
     //   al ponerle las , se hace referencia a si mismo, es decir rojo: rojo,
     this.colores = {
@@ -164,30 +163,45 @@ class game {
       this.elegirColor.bind(this)
     );
   }
+  victoria() {
+    Swal.fire({
+      title: "Custom width, padding, background.",
+      width: 600,
+      padding: "3em",
+      background: "#fff url(/images/trees.png)",
+      backdrop: `
+    rgba(0,0,123,0.4)
+    url("/images/nyan-cat.gif")
+    left top
+    no-repeat
+  `,
+    });
+  }
+
   elegirColor(ev) {
     const nombreColor = ev.target.dataset.color;
     const numeroColor = this.transformarColoraNumero(nombreColor);
     this.iluminarColor(nombreColor);
     if (numeroColor === this.secuencia[this.subnivel]) {
       this.subnivel++;
-      console.log("acertado");
       if (this.subnivel === this.nivel) {
         this.nivel++;
         this.eliminarElementosClick();
         if (this.nivel === this.secuencia.length + 1) {
-          // victoria
+          this.victoria();
         } else {
           // console.log("aaaaa");
           setTimeout(() => this.nextLevel(), 1200);
         }
       }
     } else {
-      console.log("error");
     }
   }
 }
 
+// alerta
 // funcion que se activa al dar click al boton
 function empezarJuego() {
-  window.juego = new game();
+  btnEmpezar.classList.add("hide");
+  setTimeout(() => (window.juego = new game()), 1000);
 }
