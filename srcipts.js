@@ -41,6 +41,7 @@ class game {
       .fill(0)
       .map((n) => Math.floor(Math.random() * 9));
   }
+
   nextLevel() {
     this.subnivel = 0;
     this.iluminarSecuencia();
@@ -169,23 +170,24 @@ class game {
     this.iluminarColor(nombreColor);
     if (numeroColor === this.secuencia[this.subnivel]) {
       this.subnivel++;
+      console.log("acertado");
       if (this.subnivel === this.nivel) {
         this.nivel++;
         this.eliminarElementosClick();
         if (this.nivel === this.secuencia.length + 1) {
           // victoria
         } else {
-          debugger;
-          this.nextLevel();
+          // console.log("aaaaa");
+          setTimeout(() => this.nextLevel(), 1200);
         }
       }
     } else {
-      // perdio
+      console.log("error");
     }
   }
 }
 
 // funcion que se activa al dar click al boton
 function empezarJuego() {
-  var juego = new game();
+  window.juego = new game();
 }
