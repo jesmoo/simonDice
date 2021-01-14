@@ -10,16 +10,28 @@ const rojorojo = document.getElementById("rojorojo");
 const rojito = document.getElementById("rojito");
 const negro = document.getElementById("negro");
 // nivels
-const MAXIMOlEVELS = 3;
+const MAXIMOlEVELS = 7;
 
 class game {
   constructor() {
-    this.inicializar();
+    // anclaje
     this.elegirColor = this.elegirColor.bind(this);
+    this.inicializar = this.inicializar.bind(this);
+    // juego
+    this.inicializar();
     this.generarSecuencia();
     this.nextLevel();
   }
+  togkeBtnEmpezar() {
+    if (btnEmpezar.classList.contains("hide")) {
+      btnEmpezar.classList.remove("hide");
+    } else {
+      btnEmpezar.classList.add("hide");
+    }
+  }
   inicializar() {
+    // complementos
+    this.togkeBtnEmpezar();
     // agrega una clase
     this.nivel = 1;
     //   al ponerle las , se hace referencia a si mismo, es decir rojo: rojo,
@@ -40,10 +52,6 @@ class game {
     this.secuencia = new Array(MAXIMOlEVELS)
       .fill(0)
       .map((n) => Math.floor(Math.random() * 9));
-    console.log("elementos array: ");
-    for (let i = 0; i < this.secuencia.length; i++) {
-      console.log(this.secuencia[i] + ", ");
-    }
   }
 
   nextLevel() {
@@ -146,24 +154,17 @@ class game {
     this.colores.negro.removeEventListener("click", this.elegirColor);
   }
   victoria() {
-    Swal.fire({
-      title: "Felicidades has ganado :D",
-      width: 310,
-      padding: "3em",
-      background: "#fff url(/images/trees.png)",
-      backdrop: `
-    rgba(0,0,123,0.4)
-    url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/67401945-34fc-46b8-8e8f-1982847277d4/ddba22b-2fad9d00-1d3f-4ec8-a65d-199a09dfa4e1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNjc0MDE5NDUtMzRmYy00NmI4LThlOGYtMTk4Mjg0NzI3N2Q0XC9kZGJhMjJiLTJmYWQ5ZDAwLTFkM2YtNGVjOC1hNjVkLTE5OWEwOWRmYTRlMS5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ._-whxwEBEaTLWUvSWL80KTGiwpoy9dSPzXSRhfTAzeM")
-    center top
-    no-repeat
-  `,
-    }).then(() => this.inicializar());
+    swal("Jesmoo", "Has Ganado, suerte para la proxima", "success").then(
+      this.inicializar
+    );
   }
 
   perdioGame() {
-    Swal.fire("Has perdido :c, suerte para la proxima").then(
-      () => this.eliminarElementosClick(),
-      this.inicializar()
+    swal("Jesmoo", "Has perdido :c, suerte para la proxima", "error").then(
+      () => {
+        this.inicializar();
+        this.eliminarElementosClick();
+      }
     );
   }
 
@@ -191,7 +192,6 @@ class game {
 // alerta
 // funcion que se activa al dar click al boton
 function empezarJuego() {
-  btnEmpezar.classList.add("hide");
   var juego = new game();
   setTimeout(() => juego, 1000);
 }
