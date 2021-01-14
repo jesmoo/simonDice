@@ -15,6 +15,7 @@ const MAXIMOlEVELS = 3;
 class game {
   constructor() {
     this.inicializar();
+    this.elegirColor = this.elegirColor.bind(this);
     this.generarSecuencia();
     this.nextLevel();
   }
@@ -39,6 +40,10 @@ class game {
     this.secuencia = new Array(MAXIMOlEVELS)
       .fill(0)
       .map((n) => Math.floor(Math.random() * 9));
+    console.log("elementos array: ");
+    for (let i = 0; i < this.secuencia.length; i++) {
+      console.log(this.secuencia[i] + ", ");
+    }
   }
 
   nextLevel() {
@@ -118,64 +123,48 @@ class game {
     this.colores[color].classList.remove("iluminar");
   }
   agregarElementosClick() {
-    this.colores.rojo.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.rojizo.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.rojillo.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.vino.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.vinillo.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.rojazo.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.rojorojo.addEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.rojito.addEventListener("click", this.elegirColor.bind(this));
-    this.colores.negro.addEventListener("click", this.elegirColor.bind(this));
+    this.colores.rojo.addEventListener("click", this.elegirColor);
+    this.colores.rojizo.addEventListener("click", this.elegirColor);
+    this.colores.rojillo.addEventListener("click", this.elegirColor);
+    this.colores.vino.addEventListener("click", this.elegirColor);
+    this.colores.vinillo.addEventListener("click", this.elegirColor);
+    this.colores.rojazo.addEventListener("click", this.elegirColor);
+    this.colores.rojorojo.addEventListener("click", this.elegirColor);
+    this.colores.rojito.addEventListener("click", this.elegirColor);
+    this.colores.negro.addEventListener("click", this.elegirColor);
   }
+
   eliminarElementosClick() {
-    this.colores.rojo.removeEventListener("click", this.elegirColor.bind(this));
-    this.colores.rojizo.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.rojillo.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.vino.removeEventListener("click", this.elegirColor.bind(this));
-    this.colores.vinillo.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.rojazo.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.rojorojo.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.rojito.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
-    this.colores.negro.removeEventListener(
-      "click",
-      this.elegirColor.bind(this)
-    );
+    this.colores.rojo.removeEventListener("click", this.elegirColor);
+    this.colores.rojizo.removeEventListener("click", this.elegirColor);
+    this.colores.rojillo.removeEventListener("click", this.elegirColor);
+    this.colores.vino.removeEventListener("click", this.elegirColor);
+    this.colores.vinillo.removeEventListener("click", this.elegirColor);
+    this.colores.rojazo.removeEventListener("click", this.elegirColor);
+    this.colores.rojorojo.removeEventListener("click", this.elegirColor);
+    this.colores.rojito.removeEventListener("click", this.elegirColor);
+    this.colores.negro.removeEventListener("click", this.elegirColor);
   }
   victoria() {
     Swal.fire({
-      title: "Custom width, padding, background.",
-      width: 600,
+      title: "Felicidades has ganado :D",
+      width: 310,
       padding: "3em",
       background: "#fff url(/images/trees.png)",
       backdrop: `
     rgba(0,0,123,0.4)
-    url("/images/nyan-cat.gif")
-    left top
+    url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/67401945-34fc-46b8-8e8f-1982847277d4/ddba22b-2fad9d00-1d3f-4ec8-a65d-199a09dfa4e1.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNjc0MDE5NDUtMzRmYy00NmI4LThlOGYtMTk4Mjg0NzI3N2Q0XC9kZGJhMjJiLTJmYWQ5ZDAwLTFkM2YtNGVjOC1hNjVkLTE5OWEwOWRmYTRlMS5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ._-whxwEBEaTLWUvSWL80KTGiwpoy9dSPzXSRhfTAzeM")
+    center top
     no-repeat
   `,
-    });
+    }).then(() => this.inicializar());
+  }
+
+  perdioGame() {
+    Swal.fire("Has perdido :c, suerte para la proxima").then(
+      () => this.eliminarElementosClick(),
+      this.inicializar()
+    );
   }
 
   elegirColor(ev) {
@@ -187,14 +176,14 @@ class game {
       if (this.subnivel === this.nivel) {
         this.nivel++;
         this.eliminarElementosClick();
-        if (this.nivel === this.secuencia.length + 1) {
+        if (this.nivel === MAXIMOlEVELS + 1) {
           this.victoria();
         } else {
-          // console.log("aaaaa");
           setTimeout(() => this.nextLevel(), 1200);
         }
       }
     } else {
+      this.perdioGame();
     }
   }
 }
@@ -203,5 +192,6 @@ class game {
 // funcion que se activa al dar click al boton
 function empezarJuego() {
   btnEmpezar.classList.add("hide");
-  setTimeout(() => (window.juego = new game()), 1000);
+  var juego = new game();
+  setTimeout(() => juego, 1000);
 }
